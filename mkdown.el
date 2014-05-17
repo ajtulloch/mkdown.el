@@ -5,6 +5,7 @@
 ;; Version: 0.1
 ;; Created: 17-05-2014
 ;; Keywords: markdown
+;; Package-Requires: ((markdown-mode "2.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -45,21 +46,11 @@
 (require 'markdown-mode)
 
 ;;;###autoload
-(defun mkdown-css-file-name ()
-  "Find the mkdown.css from the current file's directory."
-  (format "%s%s"
-          (file-name-directory (or load-file-name buffer-file-name))
-          "mkdown.css"))
-
-;;;###autoload
-(defadvice markdown-export-and-preview (around set-css activate compile)
-  "Export and Preview with the mkdown.css file.
-Store the previous markdown-css-path, update to the mkdown css,
-and reset after saving."
-  (setq previous-markdown-css-path markdown-css-path)
-  (setq-default markdown-css-path (mkdown-css-file-name))
-  ad-do-it
-  (setq-default markdown-css-path previous-markdown-css-path))
+(defconst mkdown-css-file-name
+  (expand-file-name
+   "mkdown.css"
+   (file-name-directory (or load-file-name buffer-file-name)))
+  "The absolute path of the mkdown.css file.")
 
 (provide 'mkdown)
 

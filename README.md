@@ -7,6 +7,12 @@ Emacs, using the style of [mkdown.com][].
 
 `M-x package-install RET mkdown RET`.
 
+Then, append  `'(markdown-css-path mkdown-css-file-name)`
+
+to your `(custom-set-variables)` invocation, or use `(setq markdown-css-path mkdown-css-file-name)`
+
+This will enable the `mkdown.el` CSS file for all Markdown previews.
+
 ## Usage ##
 
 `M-x markdown-export-and-preview` or `C-c C-c v`.
